@@ -58,6 +58,7 @@ def addBookmark(plist, title, url):
 	plist['Children'][1]['Children'].append(bookmark)
 
 # Removes a bookmark from the plist dictionary.
+# If the bookmark doesn't exist then skips
 def removeBookmark(plist, title):
 	print "Removing bookmark with title %s" % (title)
 	if findTitle(plist, title):
@@ -65,7 +66,7 @@ def removeBookmark(plist, title):
 		return None
 	print "Could not find bookmark with title %s, skipping" % (title)
 
-# Searches for bookmark with provided title
+# Searches plist for bookmark with provided title
 # Returns True if found, False otherwise
 def findTitle(plist, title):
 	for bookmark in plist['Children'][1]['Children']:
@@ -106,7 +107,6 @@ def main():
 	)
 	parser.add_argument('--removeall', action='store_true', help='remove all current bookmarks')
 	args = parser.parse_args()
-	#to_add = {"Nfl.com": "http://www.nfl.com", "reddit": "http://www.reddit.com"}
 	plist_path = getPlist('Bookmarks.plist')
 	if plist_path is None:
 		sys.exit(1)
