@@ -11,6 +11,8 @@ import uuid
 
 # Searches user's library for specified plist.
 # Returns path to plist if it exists, None otherwise.
+# If more than one plist with the specified filename is 
+# found displays a warning and exits
 def getPlist(plist):
 	user_home = os.path.join(os.path.expanduser('~'), 'Library')
 	print "searching %s for %s." % (user_home, plist)
