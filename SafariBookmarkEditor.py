@@ -1,6 +1,4 @@
 #!/usr/bin/python
-# Copyright MacTechs, 2014. All rights reserved.
-# Intended for use with Mac OS 10.10.4 
 
 import argparse
 import os
@@ -8,6 +6,37 @@ import plistlib
 import subprocess
 import sys
 import uuid
+
+# Generates an empty Safari Bookmarks plist at the provided plist path.
+def genBookmarkPlist(plist_path):
+    subprocess.Popen(["touch", plist_path])
+    contents = dict(
+        Children=list((
+            dict(
+                Title="History",
+                WebBookmarkIdentifier="History",
+                WebBookmarkType="WebBookmarkTypeProxy",
+                WebBookmarkUUID=str(uuid.uuid5(uuid.NAMESPACE_DNS, "History")),
+            ),
+            dict(
+                Children=list(),
+                Title="BookmarksBar",
+                WebBookmarkType="WebBookmarkTypeList",
+                WebBookmarkUUID=str(uuid.uuid5(uuid.NAMESPACE_DNS, "BookmarksBar")),
+            ),
+            dict(
+                Title="BookmarksMenu",
+                WebBookmarkType="WebBookmarkTypeList",
+                WebBookmarkUUID=str(uuid.uuid5(uuid.NAMESPACE_DNS, "BookmarksMenu")),
+            ),
+        )),
+        Title="",
+        WebBookmarkFileVersion=1,
+        WebBookmarkType="WebBookmarkTypeList",
+        WebBookmarkUUID=str(uuid.uuid5(uuid.NAMESPACE_DNS, "")),
+    )
+    plistlib.writePlist(contents, plist_path)
+    subprocess.call(['plutil', '-convert', 'binary1', plist_path])
 
 # Searches user's library for specified plist.
 # Returns path to plist if it exists, None otherwise.
