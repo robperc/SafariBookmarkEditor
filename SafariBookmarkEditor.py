@@ -75,7 +75,7 @@ def getBookmarksPlist():
 		test = pl['Children'][1]['Children']
 	except Exception as e:
 		print "Bookmarks.plist doesn't exist or is corrupted."
-		print "A new Bookmarks.plist will be generated for editing"
+		print "A new Bookmarks.plist will be generated for editing."
 		genBookmarksPlist(plist_path)
 	return plist_path
 
