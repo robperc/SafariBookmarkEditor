@@ -8,7 +8,7 @@ import sys
 import uuid
 
 # Generates an empty Safari Bookmarks plist at the provided plist path.
-def genBookmarkPlist(plist_path):
+def genBookmarksPlist(plist_path):
     subprocess.Popen(["touch", plist_path])
     contents = dict(
         Children=list((
@@ -42,8 +42,9 @@ def genBookmarkPlist(plist_path):
 # Returns path to plist if it exists, None otherwise.
 # If more than one plist with the specified filename is 
 # found displays a warning and exits
+# Deprecated in favor of getBookmarksPlist
 def getPlist(plist):
-	user_home = os.path.join(os.path.expanduser('~'), 'Library')
+	user_home = os.path.expanduser('~/Library')
 	print "searching %s for %s." % (user_home, plist)
 	paths = []
 	for root, dirs, files in os.walk(user_home):
@@ -61,6 +62,22 @@ def getPlist(plist):
 	else:
 		print "%s not found in user Library." % (plist)
 	return None
+
+# Returns expanded path to ~/Library/Safari/Bookmarks.plist.
+# First checks to see Bookmarks plist exists and has correct form.
+# If either of these conditions aren't met, removes existing Bookmarks.plist
+# and rewrites one with the correct form.
+def getBookmarksPlist():
+	print "Checking to see if Bookmarks.plist exists and has correct form."
+	plist_path = os.path.expanduser('~/Library/Safari/Bookmarks.plist')
+	try:
+		pl = plistlib.readPlist(plist_path)
+		test = pl['Children'][1]['Children']
+	except Exception as e:
+		print "Bookmarks.plist doesn't exist or is corrupted."
+		print "A new Bookmarks.plist will be generated for editing"
+		genBookmarksPlist(plist_path)
+	return plist_path
 
 # Returns dict containing information read from plist file and
 # a boolean value stating whether the plist had to be converted.
@@ -81,7 +98,7 @@ def readPlist(plist_path):
 # If title of bookmark to be added is the same as a 
 # preexisting bookmark the bookmark is skipped.
 def addBookmark(plist, title, url):
-	print "Checking for preexisting bookmarks title %s." % (title)
+	print "Attempting to add bookmark to %s with title %s." % (url, title)
 	if findTitle(plist, title):
 		print "Found preexisting bookmark with title %s, skipping." % (title)
 		return
@@ -101,7 +118,7 @@ def addBookmark(plist, title, url):
 # Removes a bookmark from the plist dictionary.
 # If the bookmark doesn't exist then skips
 def removeBookmark(plist, title):
-	print "Removing bookmark with title %s." % (title)
+	print "Attempting to remove bookmark with title %s." % (title)
 	if findTitle(plist, title, remove=True):
 		print "Bookmark found and removed."
 		return
@@ -121,7 +138,7 @@ def findTitle(plist, title, remove=False):
 
 # Removes all bookmarks from the plist dictionary
 def removeAll(plist):
-	print "Removing all bookmarks"
+	print "Removing all bookmarks."
 	# Remove bookmarks in reveresed order to avoid shifting issues
 	for bookmark in reversed(plist['Children'][1]['Children']):
 		title = bookmark['URIDictionary']['title']
@@ -151,7 +168,7 @@ def main():
 	)
 	parser.add_argument('--removeall', action='store_true', help='remove all current bookmarks')
 	args = parser.parse_args()
-	plist_path = getPlist('Bookmarks.plist')
+	plist_path = getBookmarksPlist()
 	if plist_path is None:
 		sys.exit(1)
 	plist, converted = readPlist(plist_path)
