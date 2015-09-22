@@ -77,6 +77,7 @@ def getBookmarksPlist():
 		print "Bookmarks.plist doesn't exist or is corrupted."
 		print "A new Bookmarks.plist will be generated for editing."
 		genBookmarksPlist(plist_path)
+	print "Reading %s into dict." % (plist_path)
 	return plist_path
 
 # Returns dict containing information read from plist file and
@@ -84,7 +85,6 @@ def getBookmarksPlist():
 # Converts plist to xml1 form before reading if it is a binary plist.
 def readBookmarksPlist(plist_path):
 	converted = False
-	print "Reading %s into dict." % (plist_path)
 	try:
 		pl = plistlib.readPlist(plist_path)
 	except:
