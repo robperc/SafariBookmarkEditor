@@ -71,7 +71,7 @@ def getBookmarksPlist():
 	print "Checking to see if Bookmarks.plist exists and has correct form."
 	plist_path = os.path.expanduser('~/Library/Safari/Bookmarks.plist')
 	try:
-		pl = plistlib.readPlist(plist_path)
+		pl, converted = readPlist(plist_path)
 		test = pl['Children'][1]['Children']
 	except Exception as e:
 		print "Bookmarks.plist doesn't exist or is corrupted."
