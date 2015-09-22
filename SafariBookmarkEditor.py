@@ -71,7 +71,7 @@ def getBookmarksPlist():
 	print "Checking to see if Bookmarks.plist exists and has correct form."
 	plist_path = os.path.expanduser('~/Library/Safari/Bookmarks.plist')
 	try:
-		pl, converted = readPlist(plist_path)
+		pl, converted = readBookmarksPlist(plist_path)
 		test = pl['Children'][1]['Children']
 	except Exception as e:
 		print "Bookmarks.plist doesn't exist or is corrupted."
@@ -82,7 +82,7 @@ def getBookmarksPlist():
 # Returns dict containing information read from plist file and
 # a boolean value stating whether the plist had to be converted.
 # Converts plist to xml1 form before reading if it is a binary plist.
-def readPlist(plist_path):
+def readBookmarksPlist(plist_path):
 	converted = False
 	print "Reading %s into dict." % (plist_path)
 	try:
@@ -171,7 +171,7 @@ def main():
 	plist_path = getBookmarksPlist()
 	if plist_path is None:
 		sys.exit(1)
-	plist, converted = readPlist(plist_path)
+	plist, converted = readBookmarksPlist(plist_path)
 	if args.removeall:
 		removeAll(plist)
 	if args.remove:
