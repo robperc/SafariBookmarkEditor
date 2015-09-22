@@ -5,6 +5,7 @@ in the ~/Library/Safari/ folder or in the case of a corrupt Bookmarks.plist the 
 the current Bookmarks.plist and generate a new one with the proper format. Bookmark titles are 
 checked against those already in the Bookmarks.plist to ensure no collisions occur.
 
+
 usage: SafariBookmarkEditor.py [-h] [--add title::url [title::url ...]]
                                [--remove title [title ...]] [--removeall]
 
