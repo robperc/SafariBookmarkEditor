@@ -160,7 +160,7 @@ def main():
 	parser = argparse.ArgumentParser(
 		description='Command line tool for adding and removing Safari bookmarks in the context of the currently logged in user.',
 	)
-	parser.add_argument('--add', metavar='title|url', type=str, nargs='+', 
+	parser.add_argument('--add', metavar='title::url', type=str, nargs='+', 
 		help='double-colon seperated title and url of bookmark(s) to add in IE: --add MyWebsite::http://www.mywebsite.com MyOtherWebsite::http://www.myotherwebsite.com',
 	)
 	parser.add_argument('--remove', metavar='title', type=str, nargs='+', 
