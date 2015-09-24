@@ -68,16 +68,12 @@ def getPlist(plist):
 # If either of these conditions aren't met, removes existing Bookmarks.plist
 # and rewrites one with the correct form.
 def getBookmarksPlist():
-	print "Checking to see if Bookmarks.plist exists and has correct form."
+	print "Checking to ensure Bookmarks.plist exists."
 	plist_path = os.path.expanduser('~/Library/Safari/Bookmarks.plist')
-	try:
-		pl, converted = readBookmarksPlist(plist_path)
-		test = pl['Children'][1]['Children']
-	except Exception as e:
-		print "Bookmarks.plist doesn't exist or is corrupted."
-		print "A new Bookmarks.plist will be generated for editing."
+	if not os.path.isfile(plist_path):
+		print "Bookmarks.plist doesn't appear to exist."
+		print "Generating new Bookmarks.plist."
 		genBookmarksPlist(plist_path)
-	print "Reading %s into dict." % (plist_path)
 	return plist_path
 
 # Returns dict containing information read from plist file and
@@ -91,6 +87,14 @@ def readBookmarksPlist(plist_path):
 		print "Plist appears to be in binary form, converting to xml."
 		converted = True
 		subprocess.call(['plutil', '-convert', 'xml1', plist_path])
+	try:
+		pl = plistlib.readPlist(plist_path)
+	except:
+		print "Bookmarks.plist appears to be corrupted."
+		print "Generating new Bookmarks.plist."
+		converted = True
+		genBookmarksPlist(plist_path)
+		subprocess.call(['plutil', '-convert', 'xml1', plist_path])
 		pl = plistlib.readPlist(plist_path)
 	return pl, converted
 
@@ -98,7 +102,7 @@ def readBookmarksPlist(plist_path):
 # If title of bookmark to be added is the same as a 
 # preexisting bookmark the bookmark is skipped.
 def addBookmark(plist, title, url):
-	print "Attempting to add bookmark to %s with title %s." % (url, title)
+	print "Attempting to add bookmark for %s with title %s." % (url, title)
 	if findTitle(plist, title):
 		print "Found preexisting bookmark with title %s, skipping." % (title)
 		return
