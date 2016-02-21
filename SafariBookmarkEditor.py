@@ -9,7 +9,16 @@ import uuid
 
 # Generates an empty Safari Bookmarks plist at the provided plist path.
 def genBookmarksPlist(plist_path):
-    subprocess.Popen(["touch", plist_path])
+	"""Generates a boilerplate Safari Bookmarks plist at plist path.
+
+	Args:
+		plist_path (str): Path to generate boilerplate Safari bookmarks plist at.
+
+	Raises:
+		CalledProcessError if creation of plist fails.
+
+	"""
+    subprocess.check_call(["touch", plist_path])
     contents = dict(
         Children=list((
             dict(
