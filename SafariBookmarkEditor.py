@@ -7,7 +7,6 @@ import subprocess
 import sys
 import uuid
 
-# Generates an empty Safari Bookmarks plist at the provided plist path.
 def genBookmarksPlist(plist_path):
 	"""Generates a boilerplate Safari Bookmarks plist at plist path.
 
