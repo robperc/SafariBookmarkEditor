@@ -46,11 +46,6 @@ def genBookmarksPlist(plist_path):
     plistlib.writePlist(contents, plist_path)
     subprocess.call(['plutil', '-convert', 'binary1', plist_path])
 
-# Searches user's library for specified plist.
-# Returns path to plist if it exists, None otherwise.
-# If more than one plist with the specified filename is 
-# found displays a warning and exits
-# Deprecated in favor of getBookmarksPlist
 def getPlist(plist):
 	"""Searches user's library for specified plist.
 
