@@ -52,6 +52,19 @@ def genBookmarksPlist(plist_path):
 # found displays a warning and exits
 # Deprecated in favor of getBookmarksPlist
 def getPlist(plist):
+	"""Searches user's library for specified plist.
+
+	Args:
+		plist (str): Name of plist to search user's home directory for.
+
+	Returns:
+		Path to plist if a match is found.
+		None otherwise.
+
+	Raises:
+		CalledProcessError if creation of plist fails.
+
+	"""
 	user_home = os.path.expanduser('~/Library')
 	print "searching %s for %s." % (user_home, plist)
 	paths = []
