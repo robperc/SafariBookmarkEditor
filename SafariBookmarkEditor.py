@@ -79,17 +79,13 @@ def getPlist(plist):
 		print "%s not found in user Library." % (plist)
 	return None
 
-# Returns expanded path to ~/Library/Safari/Bookmarks.plist.
-# First checks to see Bookmarks plist exists and has correct form.
-# If either of these conditions aren't met, removes existing Bookmarks.plist
-# and rewrites one with the correct form.
 def getBookmarksPlist():
 	"""Checks to see Bookmarks plist exists and has correct form. 
 	If either of these conditions aren't met replaces existing plist with new empty one.
 
 	Returns:
 		Expanded path to ~/Library/Safari/Bookmarks.plist
-		
+
 	"""
 	print "Checking to ensure Bookmarks.plist exists."
 	plist_path = os.path.expanduser('~/Library/Safari/Bookmarks.plist')
