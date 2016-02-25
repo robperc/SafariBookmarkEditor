@@ -99,6 +99,16 @@ def getBookmarksPlist():
 # a boolean value stating whether the plist had to be converted.
 # Converts plist to xml1 form before reading if it is a binary plist.
 def readBookmarksPlist(plist_path):
+	"""Parses plist into dictionary. Converts plist to xml form before reading if it is a binary plist.
+
+	Args:
+		plist_path (str): Path of plist to parse.
+
+	Returns:
+		(Dictionary, True) if plist was converted to xml form before parsing.
+		(Dictionary, False) otherwise.
+
+	"""
 	converted = False
 	try:
 		pl = plistlib.readPlist(plist_path)
