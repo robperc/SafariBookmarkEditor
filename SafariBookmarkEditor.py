@@ -95,9 +95,6 @@ def getBookmarksPlist():
 		genBookmarksPlist(plist_path)
 	return plist_path
 
-# Returns dict containing information read from plist file and
-# a boolean value stating whether the plist had to be converted.
-# Converts plist to xml1 form before reading if it is a binary plist.
 def readBookmarksPlist(plist_path):
 	"""Parses plist into dictionary. Converts plist to xml form before reading if it is a binary plist.
 
