@@ -128,6 +128,14 @@ def readBookmarksPlist(plist_path):
 # If title of bookmark to be added is the same as a 
 # preexisting bookmark the bookmark is skipped.
 def addBookmark(plist, title, url):
+	"""Adds a bookmark to plist dictionary.
+
+	Args:
+		plist (str): Plist dictionary to add bookmark to.
+		title (str): Title to label bookmark with.
+		url   (str): Url to bookmark.
+
+	"""
 	print "Attempting to add bookmark for %s with title %s." % (url, title)
 	if findTitle(plist, title):
 		print "Found preexisting bookmark with title %s, skipping." % (title)
