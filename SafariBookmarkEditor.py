@@ -124,9 +124,6 @@ def readBookmarksPlist(plist_path):
 		pl = plistlib.readPlist(plist_path)
 	return pl, converted
 
-# Adds a bookmark to the plist dictionary.
-# If title of bookmark to be added is the same as a 
-# preexisting bookmark the bookmark is skipped.
 def addBookmark(plist, title, url):
 	"""Adds a bookmark to plist dictionary.
 
