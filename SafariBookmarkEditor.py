@@ -8,7 +8,8 @@ import sys
 import uuid
 
 def genBookmarksPlist(plist_path):
-	"""Generates a boilerplate Safari Bookmarks plist at plist path.
+	"""
+	Generates a boilerplate Safari Bookmarks plist at plist path.
 
 	Args:
 		plist_path (str): Path to generate boilerplate Safari bookmarks plist at.
@@ -47,7 +48,8 @@ def genBookmarksPlist(plist_path):
     subprocess.call(['plutil', '-convert', 'binary1', plist_path])
 
 def getPlist(plist):
-	"""Searches user's library for specified plist.
+	"""
+	Searches user's library for specified plist.
 
 	Args:
 		plist (str): Name of plist to search user's home directory for.
@@ -80,7 +82,8 @@ def getPlist(plist):
 	return None
 
 def getBookmarksPlist():
-	"""Checks to see Bookmarks plist exists and has correct form. 
+	"""
+	Checks to see Bookmarks plist exists and has correct form. 
 	If either of these conditions aren't met replaces existing plist with new empty one.
 
 	Returns:
@@ -96,7 +99,8 @@ def getBookmarksPlist():
 	return plist_path
 
 def readBookmarksPlist(plist_path):
-	"""Parses plist into dictionary. Converts plist to xml form before reading if it is a binary plist.
+	"""
+	Parses plist into dictionary. Converts plist to xml form before reading if it is a binary plist.
 
 	Args:
 		plist_path (str): Path of plist to parse.
@@ -125,7 +129,8 @@ def readBookmarksPlist(plist_path):
 	return pl, converted
 
 def addBookmark(plist, title, url):
-	"""Adds a bookmark to plist dictionary.
+	"""
+	Adds a bookmark to plist dictionary.
 
 	Args:
 		plist (str): Plist dictionary to add bookmark to.
