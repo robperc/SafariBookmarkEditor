@@ -158,6 +158,14 @@ def addBookmark(plist, title, url):
 # Removes a bookmark from the plist dictionary.
 # If the bookmark doesn't exist then skips
 def removeBookmark(plist, title):
+	"""
+	Removes bookmark identified by title from plist dictionary if found.
+
+	Args:
+		plist (str): Plist dictionary to remove bookmark from.
+		title (str): Title bookmark is identified by.
+
+	"""
 	print "Attempting to remove bookmark with title %s." % (title)
 	if findTitle(plist, title, remove=True):
 		print "Bookmark found and removed."
