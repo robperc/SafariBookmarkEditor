@@ -155,8 +155,6 @@ def addBookmark(plist, title, url):
 	)
 	plist['Children'][1]['Children'].append(bookmark)
 
-# Removes a bookmark from the plist dictionary.
-# If the bookmark doesn't exist then skips
 def removeBookmark(plist, title):
 	"""
 	Removes bookmark identified by title from plist dictionary if found.
