@@ -174,6 +174,20 @@ def removeBookmark(plist, title):
 # Returns True if found, False otherwise
 # If remove is True removes the bookmark if found
 def findTitle(plist, title, remove=False):
+	"""
+	Boolean test to check if bookmark identified by title exists in plist dictionary.
+	Bookmark identified by title can optionally be removed if specified.
+
+	Args:
+		plist (str): Plist dictionary to search (and optionally remove bookmark from).
+		title (str): Title bookmark is identified by.
+		remove (Optional(bool)): Remove bookmark identified by title (if found) if set to True.
+	
+	Returns:
+		True if bookmark identified by title is found.
+		False otherwise.
+
+	"""
 	for bookmark in plist['Children'][1]['Children']:
 		found_title = bookmark['URIDictionary']['title']
 		if title == found_title:
