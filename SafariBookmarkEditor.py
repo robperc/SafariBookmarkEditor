@@ -170,9 +170,6 @@ def removeBookmark(plist, title):
 		return
 	print "Could not find bookmark with title %s, skipping." % (title)
 
-# Searches plist for bookmark with provided title
-# Returns True if found, False otherwise
-# If remove is True removes the bookmark if found
 def findTitle(plist, title, remove=False):
 	"""
 	Boolean test to check if bookmark identified by title exists in plist dictionary.
