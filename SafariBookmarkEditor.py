@@ -66,8 +66,7 @@ def getPlist(plist):
 	print "searching %s for %s." % (user_home, plist)
 	paths = []
 	for root, dirs, files in os.walk(user_home):
-		# Ignore hidden directories and paths
-		dirs[:] = [d for d in dirs if not d[0] == '.']
+		# Ignore hidden files
 		files = [f for f in files if not f[0] == '.']
 		if plist in files:
 			path = os.path.join(root, plist)
