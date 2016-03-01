@@ -68,11 +68,10 @@ def getPlist(plist):
     for root, dirs, files in os.walk(user_home):
         for file in files:
             # Skip hidden files
-            if file[0] == '.':
-                continue
-            path = os.path.join(root, file)
-            print "found: %s." % path
-            paths.append(path)
+            if file[0] != '.' and file == plist:
+                path = os.path.join(root, file)
+                print "found: %s." % path
+                paths.append(path)
     if len(paths) == 1:
         return paths[0]
     elif len(paths) > 1:
