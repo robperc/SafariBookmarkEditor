@@ -159,7 +159,7 @@ def removeBookmark(plist, title):
     Removes bookmark identified by title from plist dictionary if found.
 
     Args:
-        plist (str): Plist dictionary to remove bookmark from.
+        plist (dict(str: str, ..., str: str)): Plist dictionary to remove bookmark from.
         title (str): Title bookmark is identified by.
 
     """
