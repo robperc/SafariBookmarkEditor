@@ -192,7 +192,6 @@ def findTitle(plist, title, remove=False):
             return True
     return False
 
-# Removes all bookmarks from the plist dictionary
 def removeAll(plist):
 	"""
 	Removes all bookmarks from the plist dictionary.
