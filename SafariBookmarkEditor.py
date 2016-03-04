@@ -194,6 +194,13 @@ def findTitle(plist, title, remove=False):
 
 # Removes all bookmarks from the plist dictionary
 def removeAll(plist):
+	"""
+	Removes all bookmarks from the plist dictionary.
+
+	Args:
+		plist (dict(str: str, ..., str: str)): Plist dictionary to search (and optionally remove bookmark from).
+
+	"""
     print "Removing all bookmarks."
     # Remove bookmarks in reveresed order to avoid shifting issues
     for bookmark in reversed(plist['Children'][1]['Children']):
