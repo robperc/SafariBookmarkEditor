@@ -132,7 +132,7 @@ def addBookmark(plist, title, url):
     Adds a bookmark to plist dictionary.
 
     Args:
-        plist (str): Plist dictionary to add bookmark to.
+        plist (dict(str: str, ..., str: str)): Plist dictionary to add bookmark to.
         title (str): Title to label bookmark with.
         url   (str): Url to bookmark.
 
