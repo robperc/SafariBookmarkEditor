@@ -198,7 +198,7 @@ def removeAll(plist):
 	Removes all bookmarks from the plist dictionary.
 
 	Args:
-		plist (dict(str: str, ..., str: str)): Plist dictionary to search (and optionally remove bookmark from).
+		plist (dict(str: str, ..., str: str)): Plist dictionary to remove all bookmarks from.
 
 	"""
     print "Removing all bookmarks."
