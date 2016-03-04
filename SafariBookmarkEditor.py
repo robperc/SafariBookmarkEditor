@@ -175,7 +175,7 @@ def findTitle(plist, title, remove=False):
     Bookmark identified by title can optionally be removed if specified.
 
     Args:
-        plist (str): Plist dictionary to search (and optionally remove bookmark from).
+        plist (dict(str: str, ..., str: str)): Plist dictionary to search (and optionally remove bookmark from).
         title (str): Title bookmark is identified by.
         remove (Optional(bool)): Remove bookmark identified by title (if found) if set to True.
     
