@@ -211,6 +211,18 @@ def removeAll(plist):
 # Writes plist to specified path.
 # Converts to binary form after writing if binary=True.
 def writePlist(plist, plist_path, binary=False):
+    """
+    Removes all bookmarks from the plist dictionary.
+
+    Args:
+        plist (dict(str: str, ..., str: str)): Plist dictionary to remove all bookmarks from.
+        plist_path (str): Path to write plist.
+
+    Keyword Args:
+        binary (bool): Whether the plist should be written in binary format.
+                       Defaults to False.
+
+    """
     print "Writing modified plist to %s." % (plist_path)
     plistlib.writePlist(plist, plist_path)
     if binary:
