@@ -207,9 +207,6 @@ def removeAll(plist):
         print "Removing bookmark w/ title %s." % (title)
         plist['Children'][1]['Children'].remove(bookmark)
 
-
-# Writes plist to specified path.
-# Converts to binary form after writing if binary=True.
 def writePlist(plist, plist_path, binary=False):
     """
     Writes plist dictionary to file at path.
