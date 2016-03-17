@@ -309,26 +309,6 @@ def removeAll(plist):
 		print "Removing bookmark w/ title %s." % (title)
 		plist['Children'][1]['Children'].remove(bookmark)
 
-def writePlist(plist, plist_path, binary=False):
-	"""
-	Writes plist dictionary to file at path.
-
-	Args:
-		plist (dict(str: str, ..., str: str)): Plist dictionary to remove all bookmarks from.
-		plist_path (str): Path to write plist.
-
-	Keyword Args:
-		binary (bool): Whether the plist should be written in binary format.
-					   Defaults to False.
-
-	"""
-	print "Writing modified plist to %s." % (plist_path)
-	plistlib.writePlist(plist, plist_path)
-	if binary:
-		print "Converting %s to binary." % (plist_path)
-		subprocess.call(['plutil', '-convert', 'binary1', plist_path])
-	print "Done"
-
 def main():
 	parser = argparse.ArgumentParser(
 		description='Command line tool for adding and removing Safari bookmarks in the context of the currently logged in user.',
