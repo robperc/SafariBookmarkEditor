@@ -10,10 +10,26 @@ import uuid
 class SafariBookmarks(object):
 
 	def __init__(self):
-		self.plist_path = getBookmarksPlist()
+		self.plist_path = self.get()
 		self.plist      = None
 		self.bookmarks  = None
 		self.read()
+
+	def get(self):
+		"""
+		Checks to see Bookmarks plist exists and has correct form. 
+		If either of these conditions aren't met replaces existing plist with new empty one.
+
+		Returns:
+			Expanded path to ~/Library/Safari/Bookmarks.plist
+
+		"""
+		plist_path = os.path.expanduser('~/Library/Safari/Bookmarks.plist')
+		if not os.path.isfile(plist_path):
+			print "Bookmarks.plist doesn't appear to exist."
+			print "Generating new Bookmarks.plist."
+			genBookmarksPlist(plist_path)
+		return plist_path
 
 	def generate(self):
 		"""
@@ -140,6 +156,10 @@ class SafariBookmarks(object):
 		return False
 
 	def write(self):
+		"""
+		Writes modified plist dictionary to bookmarks plist and converts to binary format.
+
+		"""
 		plistlib.writePlist(self.plist, self.plist_path)
 		subprocess.call(['plutil', '-convert', 'binary1', self.plist_path])
 
