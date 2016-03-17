@@ -294,21 +294,6 @@ def findTitle(plist, title, remove=False):
 			return True
 	return False
 
-def removeAll(plist):
-	"""
-	Removes all bookmarks from the plist dictionary.
-
-	Args:
-		plist (dict(str: str, ..., str: str)): Plist dictionary to remove all bookmarks from.
-
-	"""
-	print "Removing all bookmarks."
-	# Remove bookmarks in reveresed order to avoid shifting issues
-	for bookmark in reversed(plist['Children'][1]['Children']):
-		title = bookmark['URIDictionary']['title']
-		print "Removing bookmark w/ title %s." % (title)
-		plist['Children'][1]['Children'].remove(bookmark)
-
 def main():
 	parser = argparse.ArgumentParser(
 		description='Command line tool for adding and removing Safari bookmarks in the context of the currently logged in user.',
