@@ -51,6 +51,26 @@ class SafariBookmarks(object):
         )
         plistlib.writePlist(contents, self.plist_path)
 
+        def read(self):
+            """
+            Parses plist into dictionary. Creates a new empty bookmarks plist if plist can't be read.
+
+            Args:
+                plist_path (str): Path of plist to parse.
+
+            Returns:
+                Dictionary containing info parsed from bookmarks plist.
+
+            """
+            try:
+                pl = plistlib.readPlist(self.plist_path)
+            except:
+                print "Bookmarks.plist appears to be corrupted."
+                print "Generating new Bookmarks.plist."
+                genBookmarksPlist(self.plist_path)
+                pl = plistlib.readPlist(self.plist_path)
+            return pl
+
 
 def genBookmarksPlist(plist_path):
     """
