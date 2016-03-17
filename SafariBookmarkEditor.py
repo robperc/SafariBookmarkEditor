@@ -11,7 +11,7 @@ class SafariBookmarks(object):
 
     def __init__(self):
         self.plist_path = getBookmarksPlist()
-        self.plist      = 
+        self.plist      = None
         self.bookmarks  = None
         self.update
 
@@ -51,26 +51,45 @@ class SafariBookmarks(object):
         )
         plistlib.writePlist(contents, self.plist_path)
 
-        def read(self):
-            """
-            Parses plist into dictionary. Creates a new empty bookmarks plist if plist can't be read.
+    def read(self):
+        """
+        Parses plist into dictionary. Creates a new empty bookmarks plist if plist can't be read.
 
-            Args:
-                plist_path (str): Path of plist to parse.
+        Returns:
+            Dictionary containing info parsed from bookmarks plist.
 
-            Returns:
-                Dictionary containing info parsed from bookmarks plist.
+        """
+        try:
+            pl = plistlib.readPlist(self.plist_path)
+        except:
+            print "Bookmarks.plist appears to be corrupted."
+            print "Generating new Bookmarks.plist."
+            self.generate() # if plist can't be read generate new empty one.
+            pl = plistlib.readPlist(self.plist_path)
+        return pl
 
-            """
-            try:
-                pl = plistlib.readPlist(self.plist_path)
-            except:
-                print "Bookmarks.plist appears to be corrupted."
-                print "Generating new Bookmarks.plist."
-                genBookmarksPlist(self.plist_path)
-                pl = plistlib.readPlist(self.plist_path)
-            return pl
+    def add(self, title, url):
+        """
+        Adds a bookmark to plist dictionary.
 
+        Args:
+            title (str): Title to label bookmark with.
+            url   (str): Url to bookmark.
+
+        """
+        if self.findTitle(title):
+            print "Warning: Found preexisting bookmark with title %s, skipping." % (title)
+            return
+
+        bookmark = dict(
+            WebBookmarkType='WebBookmarkTypeLeaf',
+            WebBookmarkUUID=str(uuid.uuid5(uuid.NAMESPACE_DNS, title)),
+            URLString=url,
+            URIDictionary=dict(
+                title=title
+            ),
+        )
+        self.children.append(bookmark)
 
 def genBookmarksPlist(plist_path):
     """
