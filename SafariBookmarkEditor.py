@@ -7,6 +7,13 @@ import subprocess
 import sys
 import uuid
 
+class SafariBookmarks(object):
+
+    def __init__(self):
+        self.plist_path = getBookmarksPlist()
+        self.bookmarks  = None
+        self.update
+
 def genBookmarksPlist(plist_path):
     """
     Generates a boilerplate Safari Bookmarks plist at plist path.
