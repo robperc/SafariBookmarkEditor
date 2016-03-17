@@ -140,7 +140,8 @@ class SafariBookmarks(object):
 
 		Args:
 			title (str): Title bookmark is identified by.
-			remove (Optional(bool)): Remove bookmark identified by title (if found) if set to True.
+		Keyword Args:
+			remove (bool): Removes bookmark identified by title (if found) if set to True.
 		
 		Returns:
 			True if bookmark identified by title is found.
