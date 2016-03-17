@@ -11,15 +11,13 @@ class SafariBookmarks(object):
 
     def __init__(self):
         self.plist_path = getBookmarksPlist()
+        self.plist      = 
         self.bookmarks  = None
         self.update
 
-    def genBookmarksPlist(self):
+    def generate(self):
         """
         Generates a boilerplate Safari Bookmarks plist at plist path.
-
-        Args:
-            plist_path (str): Path to generate boilerplate Safari bookmarks plist at.
 
         Raises:
             CalledProcessError if creation of plist fails.
@@ -52,6 +50,7 @@ class SafariBookmarks(object):
             WebBookmarkUUID=str(uuid.uuid5(uuid.NAMESPACE_DNS, "")),
         )
         plistlib.writePlist(contents, self.plist_path)
+
 
 def genBookmarksPlist(plist_path):
     """
