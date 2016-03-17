@@ -199,36 +199,6 @@ def getBookmarksPlist():
 		genBookmarksPlist(plist_path)
 	return plist_path
 
-def readBookmarksPlist(plist_path):
-	"""
-	Parses plist into dictionary. Converts plist to xml form before reading if it is a binary plist.
-
-	Args:
-		plist_path (str): Path of plist to parse.
-
-	Returns:
-		(Dictionary, True) if plist was converted to xml form before parsing.
-		(Dictionary, False) otherwise.
-
-	"""
-	converted = False
-	try:
-		pl = plistlib.readPlist(plist_path)
-	except:
-		print "Plist appears to be in binary form, converting to xml."
-		converted = True
-		subprocess.call(['plutil', '-convert', 'xml1', plist_path])
-	try:
-		pl = plistlib.readPlist(plist_path)
-	except:
-		print "Bookmarks.plist appears to be corrupted."
-		print "Generating new Bookmarks.plist."
-		converted = True
-		genBookmarksPlist(plist_path)
-		subprocess.call(['plutil', '-convert', 'xml1', plist_path])
-		pl = plistlib.readPlist(plist_path)
-	return pl, converted
-
 def main():
 	parser = argparse.ArgumentParser(
 		description='Command line tool for adding and removing Safari bookmarks in the context of the currently logged in user.',
