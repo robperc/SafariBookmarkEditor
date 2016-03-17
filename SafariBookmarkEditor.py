@@ -229,34 +229,6 @@ def readBookmarksPlist(plist_path):
 		pl = plistlib.readPlist(plist_path)
 	return pl, converted
 
-def addBookmark(plist, title, url):
-	"""
-	Adds a bookmark to plist dictionary.
-
-	Args:
-		plist (dict(str: str, ..., str: str)): Plist dictionary to add bookmark to.
-		title (str): Title to label bookmark with.
-		url   (str): Url to bookmark.
-
-	"""
-	print "Attempting to add bookmark for %s with title %s." % (url, title)
-	if findTitle(plist, title):
-		print "Found preexisting bookmark with title %s, skipping." % (title)
-		return
-	print "No preexisting bookmarks with title %s." % (title)
-	print "Adding bookmark to %s with title %s." % (url, title)
-	uri_dict = dict(
-		title=title
-	)
-	bookmark = dict(
-		WebBookmarkType='WebBookmarkTypeLeaf',
-		WebBookmarkUUID=str(uuid.uuid5(uuid.NAMESPACE_DNS, title)),
-		URLString=url,
-		URIDictionary=uri_dict,
-	)
-	plist['Children'][1]['Children'].append(bookmark)
-
-
 def main():
 	parser = argparse.ArgumentParser(
 		description='Command line tool for adding and removing Safari bookmarks in the context of the currently logged in user.',
