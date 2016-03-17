@@ -256,21 +256,6 @@ def addBookmark(plist, title, url):
 	)
 	plist['Children'][1]['Children'].append(bookmark)
 
-def removeBookmark(plist, title):
-	"""
-	Removes bookmark identified by title from plist dictionary if found.
-
-	Args:
-		plist (dict(str: str, ..., str: str)): Plist dictionary to remove bookmark from.
-		title (str): Title bookmark is identified by.
-
-	"""
-	print "Attempting to remove bookmark with title %s." % (title)
-	if findTitle(plist, title, remove=True):
-		print "Bookmark found and removed."
-		return
-	print "Could not find bookmark with title %s, skipping." % (title)
-
 
 def main():
 	parser = argparse.ArgumentParser(
