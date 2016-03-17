@@ -143,46 +143,6 @@ class SafariBookmarks(object):
 		plistlib.writePlist(self.plist, self.plist_path)
 		subprocess.call(['plutil', '-convert', 'binary1', self.plist_path])
 
-def genBookmarksPlist(plist_path):
-	"""
-	Generates a boilerplate Safari Bookmarks plist at plist path.
-
-	Args:
-		plist_path (str): Path to generate boilerplate Safari bookmarks plist at.
-
-	Raises:
-		CalledProcessError if creation of plist fails.
-
-	"""
-	subprocess.check_call(["touch", plist_path])
-	contents = dict(
-		Children=list((
-			dict(
-				Title="History",
-				WebBookmarkIdentifier="History",
-				WebBookmarkType="WebBookmarkTypeProxy",
-				WebBookmarkUUID=str(uuid.uuid5(uuid.NAMESPACE_DNS, "History")),
-			),
-			dict(
-				Children=list(),
-				Title="BookmarksBar",
-				WebBookmarkType="WebBookmarkTypeList",
-				WebBookmarkUUID=str(uuid.uuid5(uuid.NAMESPACE_DNS, "BookmarksBar")),
-			),
-			dict(
-				Title="BookmarksMenu",
-				WebBookmarkType="WebBookmarkTypeList",
-				WebBookmarkUUID=str(uuid.uuid5(uuid.NAMESPACE_DNS, "BookmarksMenu")),
-			),
-		)),
-		Title="",
-		WebBookmarkFileVersion=1,
-		WebBookmarkType="WebBookmarkTypeList",
-		WebBookmarkUUID=str(uuid.uuid5(uuid.NAMESPACE_DNS, "")),
-	)
-	plistlib.writePlist(contents, plist_path)
-	subprocess.call(['plutil', '-convert', 'binary1', plist_path])
-
 def getBookmarksPlist():
 	"""
 	Checks to see Bookmarks plist exists and has correct form. 
