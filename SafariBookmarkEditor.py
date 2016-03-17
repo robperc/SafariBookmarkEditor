@@ -111,7 +111,6 @@ class SafariBookmarks(object):
 		Removes all bookmarks from the plist dictionary.
 
 		"""
-		print "Removing all bookmarks."
 		# Remove bookmarks in reveresed order to avoid shifting issues
 		for bookmark in reversed(self.bookmarks):
 			title = bookmark['URIDictionary']['title']
@@ -193,7 +192,6 @@ def getBookmarksPlist():
 		Expanded path to ~/Library/Safari/Bookmarks.plist
 
 	"""
-	print "Checking to ensure Bookmarks.plist exists."
 	plist_path = os.path.expanduser('~/Library/Safari/Bookmarks.plist')
 	if not os.path.isfile(plist_path):
 		print "Bookmarks.plist doesn't appear to exist."
@@ -343,20 +341,17 @@ def main():
 	)
 	parser.add_argument('--removeall', action='store_true', help='remove all current bookmarks')
 	args = parser.parse_args()
-	plist_path = getBookmarksPlist()
-	if plist_path is None:
-		sys.exit(1)
-	plist, converted = readBookmarksPlist(plist_path)
+	bookmarks = SafariBookmarks()
 	if args.removeall:
-		removeAll(plist)
+		bookmarks.removeAll()
 	if args.remove:
 		for title in args.remove:
-			removeBookmark(plist, title)
+			bookmarks.remove(title)
 	if args.add:
 		for bookmark in args.add:
 			title, url = bookmark.split('::')
-			addBookmark(plist, title, url)
-	writePlist(plist, plist_path, binary=converted)
+			bookmarks.add(title, url)
+	bookmarks.write()
 
 
 if __name__ == "__main__":
