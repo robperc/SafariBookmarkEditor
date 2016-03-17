@@ -91,7 +91,7 @@ class SafariBookmarks(object):
         )
         self.children.append(bookmark)
 
-    def remove(title):
+    def remove(self, title):
         """
         Removes bookmark identified by title from plist dictionary if found.
 
@@ -99,17 +99,14 @@ class SafariBookmarks(object):
             title (str): Title bookmark is identified by.
 
         """
-        if findTitle(plist, title, remove=True):
+        if self.findTitle(title, remove=True):
             print "Bookmark with title '%s' found and removed." % (title)
             return
         print "Could not find bookmark with title %s, skipping." % (title)
 
-    def removeAll(plist):
+    def removeAll(self):
         """
         Removes all bookmarks from the plist dictionary.
-
-        Args:
-            plist (dict(str: str, ..., str: str)): Plist dictionary to remove all bookmarks from.
 
         """
         print "Removing all bookmarks."
@@ -118,6 +115,28 @@ class SafariBookmarks(object):
             title = bookmark['URIDictionary']['title']
             print "Removing bookmark w/ title %s." % (title)
             self.children.remove(bookmark)
+
+    def findTitle(self, title, remove=False):
+        """
+        Boolean test to check if bookmark identified by title exists in plist dictionary.
+        Bookmark identified by title can optionally be removed if specified.
+
+        Args:
+            title (str): Title bookmark is identified by.
+            remove (Optional(bool)): Remove bookmark identified by title (if found) if set to True.
+        
+        Returns:
+            True if bookmark identified by title is found.
+            False otherwise.
+
+        """
+        for bookmark in self.children:
+            found_title = bookmark['URIDictionary']['title']
+            if title == found_title:
+                if remove:
+                    plist['Children'][1]['Children'].remove(bookmark)
+                return True
+        return False
 
 def genBookmarksPlist(plist_path):
     """
