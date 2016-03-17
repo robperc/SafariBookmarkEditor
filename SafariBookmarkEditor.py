@@ -163,22 +163,6 @@ class SafariBookmarks(object):
 		plistlib.writePlist(self.plist, self.plist_path)
 		subprocess.call(['plutil', '-convert', 'binary1', self.plist_path])
 
-def getBookmarksPlist():
-	"""
-	Checks to see Bookmarks plist exists and has correct form. 
-	If either of these conditions aren't met replaces existing plist with new empty one.
-
-	Returns:
-		Expanded path to ~/Library/Safari/Bookmarks.plist
-
-	"""
-	plist_path = os.path.expanduser('~/Library/Safari/Bookmarks.plist')
-	if not os.path.isfile(plist_path):
-		print "Bookmarks.plist doesn't appear to exist."
-		print "Generating new Bookmarks.plist."
-		genBookmarksPlist(plist_path)
-	return plist_path
-
 def main():
 	parser = argparse.ArgumentParser(
 		description='Command line tool for adding and removing Safari bookmarks in the context of the currently logged in user.',
