@@ -93,39 +93,6 @@ def genBookmarksPlist(plist_path):
     plistlib.writePlist(contents, plist_path)
     subprocess.call(['plutil', '-convert', 'binary1', plist_path])
 
-def getPlist(plist):
-    """
-    Searches user's library for specified plist.
-
-    Args:
-        plist (str): Name of plist to search user's home directory for.
-
-    Returns:
-        Path to plist if a match is found.
-        None otherwise.
-
-    Raises:
-        CalledProcessError if creation of plist fails.
-
-    """
-    user_home = os.path.expanduser('~/Library')
-    print "searching %s for %s." % (user_home, plist)
-    paths = []
-    for root, dirs, files in os.walk(user_home):
-        for file in files:
-            # Skip hidden files
-            if file[0] != '.' and file == plist:
-                path = os.path.join(root, file)
-                print "found: %s." % path
-                paths.append(path)
-    if len(paths) == 1:
-        return paths[0]
-    elif len(paths) > 1:
-        print "More than one %s found, unsafe to continue." % (plist)
-    else:
-        print "%s not found in user Library." % (plist)
-    return None
-
 def getBookmarksPlist():
     """
     Checks to see Bookmarks plist exists and has correct form. 
