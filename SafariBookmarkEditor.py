@@ -104,6 +104,21 @@ class SafariBookmarks(object):
             return
         print "Could not find bookmark with title %s, skipping." % (title)
 
+    def removeAll(plist):
+        """
+        Removes all bookmarks from the plist dictionary.
+
+        Args:
+            plist (dict(str: str, ..., str: str)): Plist dictionary to remove all bookmarks from.
+
+        """
+        print "Removing all bookmarks."
+        # Remove bookmarks in reveresed order to avoid shifting issues
+        for bookmark in reversed(self.children):
+            title = bookmark['URIDictionary']['title']
+            print "Removing bookmark w/ title %s." % (title)
+            self.children.remove(bookmark)
+
 def genBookmarksPlist(plist_path):
     """
     Generates a boilerplate Safari Bookmarks plist at plist path.
