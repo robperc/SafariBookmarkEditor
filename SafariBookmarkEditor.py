@@ -87,7 +87,7 @@ class SafariBookmarks(object):
 		self.bookmarks = self.plist['Children'][1]['Children']
 		self.titles    = [bm["URIDictionary"]["title"] for bm in self.bookmarks if bm.get("URIDictionary") is not None]
 
-	def add(self, title, url):
+	def add(self, title, url, index=-1):
 		"""
 		Adds a bookmark to plist dictionary.
 
@@ -99,6 +99,12 @@ class SafariBookmarks(object):
 		if title in self.titles:
 			print "Warning: Found preexisting bookmark with title %s, skipping." % (title)
 			return
+		if title in self.titles:
+			return
+		if index == -1 or index > len(self.bookmarks):
+			index = len(self.bookmarks)
+		elif index < -1:
+			index = 0
 
 		bookmark = dict(
 			WebBookmarkType='WebBookmarkTypeLeaf',
@@ -108,7 +114,7 @@ class SafariBookmarks(object):
 				title=title
 			),
 		)
-		self.bookmarks.append(bookmark)
+		self.bookmarks.insert(index, bookmark)
 		self.titles.append(title)
 
 	def remove(self, title):
