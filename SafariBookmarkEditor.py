@@ -27,10 +27,10 @@ class SafariBookmarks(object):
 		if not os.path.isfile(plist_path):
 			print "Bookmarks.plist doesn't appear to exist."
 			print "Generating new Bookmarks.plist."
-			self.generate()
+			self.generate(path)
 		return plist_path
 
-	def generate(self):
+	def generate(self, plist_path):
 		"""
 		Generates a boilerplate Safari Bookmarks plist at plist path.
 
@@ -64,7 +64,7 @@ class SafariBookmarks(object):
 			WebBookmarkType="WebBookmarkTypeList",
 			WebBookmarkUUID=str(uuid.uuid5(uuid.NAMESPACE_DNS, "")),
 		)
-		plistlib.writePlist(contents, self.plist_path)
+		plistlib.writePlist(contents, plist_path)
 
 	def read(self):
 		"""
