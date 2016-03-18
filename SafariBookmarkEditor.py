@@ -11,6 +11,7 @@ class SafariBookmarks(object):
 	def __init__(self):
 		self.plist_path = self.get()
 		self.plist      = None
+		self.titles
 		self.bookmarks  = None
 		self.read()
 
@@ -82,8 +83,9 @@ class SafariBookmarks(object):
 			print "Generating new Bookmarks.plist."
 			self.generate() # if plist can't be read generate new empty one.
 			pl = plistlib.readPlist(self.plist_path)
-		self.plist = pl
+		self.plist     = pl
 		self.bookmarks = self.plist['Children'][1]['Children']
+		self.titles    = [bm["URIDictionary"]["title"] for bm in bookmarks]
 
 	def add(self, title, url):
 		"""
