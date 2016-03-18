@@ -131,7 +131,7 @@ class SafariBookmarks(object):
 
 		"""
 		# Remove bookmarks in reveresed order to avoid shifting issues
-		for bookmark in self.bookmarks:
+		for bookmark in reversed(self.bookmarks):
 			self.bookmarks.remove(bookmark)
 
 	def write(self):
