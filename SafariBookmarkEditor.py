@@ -11,7 +11,7 @@ class SafariBookmarks(object):
 	def __init__(self):
 		self.plist_path = self.get()
 		self.plist      = None
-		self.titles
+		self.titles     = None
 		self.bookmarks  = None
 		self.read()
 
@@ -129,10 +129,7 @@ class SafariBookmarks(object):
 
 		"""
 		# Remove bookmarks in reveresed order to avoid shifting issues
-		for bookmark in reversed(self.bookmarks):
-			title = bookmark['URIDictionary']['title']
-			print "Removing bookmark w/ title %s." % (title)
-			self.bookmarks.remove(bookmark)
+		self.bookmarks = list()
 
 	def findTitle(self, title, remove=False):
 		"""
