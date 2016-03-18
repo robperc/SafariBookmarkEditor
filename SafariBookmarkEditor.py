@@ -136,6 +136,20 @@ class SafariBookmarks(object):
 		for title in reversed(self.titles):
 			self.remove(title)
 
+	def move(self, title, index):
+		if title not in self.titles:
+			return
+		if index > len(self.bookmarks) or index == -1:
+			index = len(self.bookmarks)
+		elif index < -1:
+			index = 0
+		for bookmark in self.bookmarks:
+			if bookmark.get('URIDictionary') and bookmark['URIDictionary']['title'] == title:
+				to_mv = bookmark
+				break
+		self.bookmarks.remove(to_mv)
+		self.bookmarks.insert(index, to_mv)
+
 	def write(self):
 		"""
 		Writes modified plist dictionary to bookmarks plist and converts to binary format.
