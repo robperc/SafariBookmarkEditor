@@ -96,7 +96,7 @@ class SafariBookmarks(object):
 			url   (str): Url to bookmark.
 
 		"""
-		if self.findTitle(title):
+		if title in self.titles:
 			print "Warning: Found preexisting bookmark with title %s, skipping." % (title)
 			return
 
@@ -118,10 +118,12 @@ class SafariBookmarks(object):
 			title (str): Title bookmark is identified by.
 
 		"""
-		if self.findTitle(title, remove=True):
-			print "Bookmark with title '%s' found and removed." % (title)
+		if title not in self.titles:
 			return
-		print "Could not find bookmark with title %s, skipping." % (title)
+		for bookmark in self.bookmarks:
+			if bookmark.get("URIDictionary") and bookmark["URIDictionary"]["title"] == title:
+				self.bookmarks.remove(bookmark)
+				return
 
 	def removeAll(self):
 		"""
