@@ -85,7 +85,7 @@ class SafariBookmarks(object):
 			pl = plistlib.readPlist(self.plist_path)
 		self.plist     = pl
 		self.bookmarks = self.plist['Children'][1]['Children']
-		self.titles    = [bm["URIDictionary"]["title"] for bm in bookmarks]
+		self.titles    = [bm["URIDictionary"]["title"] for bm in self.bookmarks]
 
 	def add(self, title, url):
 		"""
