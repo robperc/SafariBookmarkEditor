@@ -109,6 +109,7 @@ class SafariBookmarks(object):
 			),
 		)
 		self.bookmarks.append(bookmark)
+		self.titles.append(title)
 
 	def remove(self, title):
 		"""
@@ -122,6 +123,7 @@ class SafariBookmarks(object):
 			return
 		for bookmark in self.bookmarks:
 			if bookmark.get("URIDictionary") and bookmark["URIDictionary"]["title"] == title:
+				self.titles.remove(title)
 				self.bookmarks.remove(bookmark)
 				return
 
