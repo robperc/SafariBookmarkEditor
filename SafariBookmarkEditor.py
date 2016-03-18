@@ -4,7 +4,6 @@ import argparse
 import os
 import plistlib
 import subprocess
-import sys
 import uuid
 
 class SafariBookmarks(object):
