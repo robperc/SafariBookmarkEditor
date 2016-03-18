@@ -85,7 +85,7 @@ class SafariBookmarks(object):
 			pl = plistlib.readPlist(self.plist_path)
 		self.plist     = pl
 		self.bookmarks = self.plist['Children'][1]['Children']
-		self.titles    = [bm["URIDictionary"]["title"] for bm in self.bookmarks]
+		self.titles    = [bm["URIDictionary"]["title"] for bm in self.bookmarks if bm.get("URIDictionary") is not None]
 
 	def add(self, title, url):
 		"""
@@ -129,7 +129,8 @@ class SafariBookmarks(object):
 
 		"""
 		# Remove bookmarks in reveresed order to avoid shifting issues
-		self.bookmarks = list()
+		for bookmark in self.bookmarks:
+			self.bookmarks.remove(bookmark)
 
 	def findTitle(self, title, remove=False):
 		"""
