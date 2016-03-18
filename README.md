@@ -1,6 +1,6 @@
 # SafariBookmarkEditor
 Python module for easily adding, removing, and moving positions of Safari bookmarks in the context of the currently logged in user.
-On fresh installs that lack a Bookmarks.plist in the ~/Library/Safari/ folder or in the case of a corrupt Bookmarks.plist will a boilerplate Bookmarks plist will be generated with the proper format. Bookmark titles are checked against those already in the Bookmarks.plist to ensure no collisions occur. Can also be run as a CLI tool.
+On fresh installs that lack a Bookmarks.plist in the ~/Library/Safari/ folder or in the case of a corrupt plist a boilerplate Bookmarks plist will be generated with the proper format. Bookmark titles are checked against existing bookmarks to ensure no collisions occur. Can also be run as a CLI tool.
 
 Example Usage:
 ```
