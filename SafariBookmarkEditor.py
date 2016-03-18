@@ -27,7 +27,7 @@ class SafariBookmarks(object):
 		if not os.path.isfile(plist_path):
 			print "Bookmarks.plist doesn't appear to exist."
 			print "Generating new Bookmarks.plist."
-			genBookmarksPlist(plist_path)
+			self.generate()
 		return plist_path
 
 	def generate(self):
