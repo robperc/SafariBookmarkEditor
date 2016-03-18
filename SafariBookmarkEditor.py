@@ -134,29 +134,6 @@ class SafariBookmarks(object):
 		for bookmark in self.bookmarks:
 			self.bookmarks.remove(bookmark)
 
-	def findTitle(self, title, remove=False):
-		"""
-		Boolean test to check if bookmark identified by title exists in plist dictionary.
-		Bookmark identified by title can optionally be removed if specified.
-
-		Args:
-			title (str): Title bookmark is identified by.
-		Keyword Args:
-			remove (bool): Removes bookmark identified by title (if found) if set to True.
-		
-		Returns:
-			True if bookmark identified by title is found.
-			False otherwise.
-
-		"""
-		for bookmark in self.bookmarks:
-			found_title = bookmark['URIDictionary']['title']
-			if title == found_title:
-				if remove:
-					self.bookmarks.remove(bookmark)
-				return True
-		return False
-
 	def write(self):
 		"""
 		Writes modified plist dictionary to bookmarks plist and converts to binary format.
