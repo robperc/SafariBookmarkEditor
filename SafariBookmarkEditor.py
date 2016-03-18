@@ -150,6 +150,19 @@ class SafariBookmarks(object):
 		self.bookmarks.remove(to_mv)
 		self.bookmarks.insert(index, to_mv)
 
+	def swap(self, title1, title2):
+		if (title1 not in self.titles) or (title2 not in self.titles) or (title1 == title2):
+			return
+		for index, bookmark in enumerate(self.bookmarks):
+			if bookmark.get('URIDictionary') and bookmark['URIDictionary']['title'] == title1:
+				index1 = index
+				bookmark1 = bookmark
+			if bookmark.get('URIDictionary') and bookmark['URIDictionary']['title'] == title2:
+				index2 = index
+				bookmark2 = bookmark
+		self.bookmarks[index1] = bookmark2
+		self.bookmarks[index2] = bookmark1
+
 	def write(self):
 		"""
 		Writes modified plist dictionary to bookmarks plist and converts to binary format.
