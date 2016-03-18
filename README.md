@@ -4,6 +4,26 @@ Used to add and remove bookmarks on a user basis. On fresh installs that lack a 
 in the ~/Library/Safari/ folder or in the case of a corrupt Bookmarks.plist the script will delete
 the current Bookmarks.plist and generate a new one with the proper format. Bookmark titles are 
 checked against those already in the Bookmarks.plist to ensure no collisions occur.
+
+Example Usage:
+```
+#!/usr/bin/python
+
+from SafariBookmarkEditor import SafariBookmarks          # Import the module
+
+bookmarks = SafariBookmarks()                             # Create a Safari Bookmarks instance to act on.
+
+bookmarks.add("Reddit", "https://reddit.com")             # Add bookmark for Reddit
+bookmarks.add("Apple", "https://www.apple.com", index=0)  # Add bookmark for Apple at 0th position
+bookmarks.swap("Apple", "Reddit")                         # Swap positions of Apple and Reddit bookmarks
+bookmarks.move("Apple", 0)                                # Move Apple bookmark back to 0th position
+bookmarks.remove("Apple")                                 # Remove the Apple bookmark
+
+bookmarks.write()                                         # Write changes to Bookmarks plist
+
+```
+
+CLI Usage:
 ```
 ./SafariBookmarkEditor.py -h
 usage: SafariBookmarkEditor.py [-h] [--add title::url [title::url ...]]
