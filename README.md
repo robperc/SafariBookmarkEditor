@@ -10,6 +10,7 @@ from SafariBookmarkEditor import SafariBookmarks          # Import the module
 
 bookmarks = SafariBookmarks()                             # Create a Safari Bookmarks instance to act on.
 
+bookmarks.removeAll()                                     # Remove all bookmarks
 bookmarks.add("Reddit", "https://reddit.com")             # Add bookmark for Reddit
 bookmarks.add("Apple", "https://www.apple.com", index=0)  # Add bookmark for Apple at 0th position
 bookmarks.swap("Apple", "Reddit")                         # Swap positions of Apple and Reddit bookmarks
