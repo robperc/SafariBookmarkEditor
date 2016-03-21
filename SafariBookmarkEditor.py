@@ -7,6 +7,16 @@ import subprocess
 import uuid
 
 class SafariBookmarks(object):
+	"""
+	Creates a Safari bookmark instance in the context of the current user.
+
+	Attributes:
+		plist_path                   (str): Path to Bookmarks plist of current user.
+		plist      (dict(dict, ..., dict)): XML of bookmarks dictionary parsed into plist. 
+		titles       (list(str, ..., str)): List of titles of current bookmarks.
+		bookmarks  (list(dict, ..., dict)): Reference to bookmarks entry of parsed plist dictionary.
+
+	"""
 
 	def __init__(self):
 		self.plist_path = self.get()
