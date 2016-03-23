@@ -20,9 +20,9 @@ class SafariBookmarks(object):
 
 	def __init__(self):
 		self.plist_path = self.get()
-		self.plist      = None
-		self.titles     = None
-		self.bookmarks  = None
+		self.plist      = dict()
+		self.titles     = list()
+		self.bookmarks  = list()
 		self.read()
 
 	def get(self):
@@ -149,8 +149,9 @@ class SafariBookmarks(object):
 
 		"""
 		# Remove bookmarks in reveresed order to avoid shifting issues
-		for bookmarks in reversed(self.bookmarks):
+		for bookmark in reversed(self.bookmarks):
 			self.bookmarks.remove(bookmark)
+		self.titles = list()
 
 	def move(self, title, index):
 		if title not in self.titles:
