@@ -149,8 +149,8 @@ class SafariBookmarks(object):
 
 		"""
 		# Remove bookmarks in reveresed order to avoid shifting issues
-		for title in reversed(self.titles):
-			self.remove(title)
+		for bookmarks in reversed(self.bookmarks):
+			self.bookmarks.remove(bookmark)
 
 	def move(self, title, index):
 		if title not in self.titles:
