@@ -49,7 +49,7 @@ class SafariBookmarks(object):
 			CalledProcessError if creation of plist fails.
 
 		"""
-		subprocess.check_call(["touch", self.plist_path])
+		subprocess.check_call(["touch", plist_path])
 		contents = dict(
 			Children=list((
 				dict(
