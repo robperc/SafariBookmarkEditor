@@ -188,6 +188,16 @@ class SafariBookmarks(object):
 		plistlib.writePlist(self.plist, self.plist_path)
 		subprocess.call(['plutil', '-convert', 'binary1', self.plist_path])
 
+	def getIndex(self, title):
+		if title not in self.titles:
+			return None
+		for index, bm in enumerate(self.bookmarks):
+			if bm.get("URIDictionary") is None:
+				continue
+			bm_title = bm["URIDictionary"]["title"]
+			if bm_title == title:
+				return index
+
 def main():
 	parser = argparse.ArgumentParser(
 		description='Command line tool for adding and removing Safari bookmarks in the context of the currently logged in user.',
