@@ -176,6 +176,14 @@ class SafariBookmarks(object):
 		self.bookmarks.insert(index, to_mv)
 
 	def swap(self, title1, title2):
+		"""
+		Swaps position of bookmark identified by title1 with bookmark identified by title2 if both are found.
+
+		Args:
+			title1 (str): Title 1st bookmark is identified by.
+			title2 (str): Title 2nd bookmark is identified by.
+
+		"""
 		if (title1 not in self.titles) or (title2 not in self.titles) or (title1 == title2):
 			return
 		for index, bookmark in enumerate(self.bookmarks):
