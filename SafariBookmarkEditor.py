@@ -154,6 +154,14 @@ class SafariBookmarks(object):
 		self.titles = list()
 
 	def move(self, title, index):
+		"""
+		Moves bookmark identified by title to specified index in order of bookmarks if found.
+
+		Args:
+			title (str): Title bookmark is identified by.
+			index (int): Index to move bookmark to.
+
+		"""
 		if title not in self.titles:
 			return
 		if index > len(self.bookmarks) or index == -1:
